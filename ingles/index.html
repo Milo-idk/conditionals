@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CondiQuiz — English Conditionals</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ══════════════ WELCOME ══════════════ -->
+  <section id="welcome-screen" class="screen active">
+    <div class="welcome-inner">
+      <p class="brand">⚡ CondiQuiz</p>
+      <h1>Master English<br /><em>Conditionals</em></h1>
+      <p class="tagline">Four interactive games to sharpen your knowledge of Zero, First, Second, Third, and Mixed conditionals.</p>
+      <div class="pill-row">
+        <span class="pill g1">🔗 Match</span>
+        <span class="pill g2">✏️ Fill Blank</span>
+        <span class="pill g3">❓ Quiz</span>
+        <span class="pill g4">⚖️ True/False</span>
+      </div>
+      <button id="start-btn" class="cta-btn">Let's Play →</button>
+    </div>
+    <div class="bg-fx"></div>
+  </section>
+
+  <!-- ══════════════ GAME SELECTION ══════════════ -->
+  <section id="games-screen" class="screen">
+    <div class="screen-head">
+      <h2>Choose a Game</h2>
+      <p>Four different ways to practice English conditionals</p>
+    </div>
+    <div class="games-grid">
+
+      <div class="game-card g1-card" data-game="1">
+        <div class="gc-top"><span class="gc-num g1-c">01</span><span class="gc-icon">🔗</span></div>
+        <h3>Card Matching</h3>
+        <p>Click a sentence, then click its conditional type to pair them. Match all 4 correctly!</p>
+        <span class="gc-tag">4 pairs · Click to connect</span>
+      </div>
+
+      <div class="game-card g2-card" data-game="2">
+        <div class="gc-top"><span class="gc-num g2-c">02</span><span class="gc-icon">✏️</span></div>
+        <h3>Fill in the Blank</h3>
+        <p>Complete each sentence by choosing the correct verb form. Any conditional type may appear.</p>
+        <span class="gc-tag">6 questions · Multiple choice</span>
+      </div>
+
+      <div class="game-card g3-card" data-game="3">
+        <div class="gc-top"><span class="gc-num g3-c">03</span><span class="gc-icon">❓</span></div>
+        <h3>Grammar Quiz</h3>
+        <p>Answer questions about conditional structures, rules, and usage. Test your grammar knowledge.</p>
+        <span class="gc-tag">6 questions · Multiple choice</span>
+      </div>
+
+      <div class="game-card g4-card" data-game="4">
+        <div class="gc-top"><span class="gc-num g4-c">04</span><span class="gc-icon">⚖️</span></div>
+        <h3>True or False</h3>
+        <p>Decide whether each statement about English conditionals is correct or not.</p>
+        <span class="gc-tag">4 statements · True / False</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════ GAME 1 — CARD MATCHING ══════════════ -->
+  <section id="game1-screen" class="screen">
+    <header class="game-header g1-header">
+      <button class="ghost-btn back-btn">← Back</button>
+      <span class="gh-title g1-c">🔗 Card Matching</span>
+      <span class="gh-right" id="match-status">0 / 4 matched</span>
+    </header>
+
+    <div class="match-area">
+      <p class="match-hint">
+        <strong>How to play:</strong> Click a sentence to select it (it turns blue), then click the matching conditional type.
+        Click a matched card again to undo the pair.
+      </p>
+
+      <div class="match-board">
+        <div class="match-col" id="sentences-col">
+          <p class="col-label">📄 Sentences</p>
+        </div>
+        <div class="match-divider"></div>
+        <div class="match-col" id="types-col">
+          <p class="col-label">🏷️ Conditional Types</p>
+        </div>
+      </div>
+
+      <div class="match-footer" id="match-footer">
+        <button id="check-match-btn" class="cta-btn g1-cta hidden">Check Answers ✓</button>
+        <button id="reset-match-btn" class="ghost-btn hidden">↺ Reset</button>
+      </div>
+
+      <div id="match-results" class="match-results hidden"></div>
+
+      <button id="match-continue-btn" class="cta-btn g1-cta hidden" style="margin-top:16px">Continue →</button>
+    </div>
+  </section>
+
+  <!-- ══════════════ GAME 2 & 3 — QUIZ (shared screen) ══════════════ -->
+  <section id="quiz-screen" class="screen">
+    <header class="game-header" id="quiz-header">
+      <button class="ghost-btn back-btn">← Back</button>
+      <span class="gh-title" id="quiz-game-title">Fill in the Blank</span>
+      <span class="gh-right" id="quiz-score-tag">0 pts</span>
+    </header>
+    <div class="prog-track">
+      <div id="quiz-prog-fill" class="prog-fill"></div>
+    </div>
+    <div class="quiz-body">
+      <p id="quiz-q-meta" class="q-meta">Question 1 of 6</p>
+      <p id="quiz-q-label" class="q-label">Complete the sentence:</p>
+      <h2 id="quiz-q-text" class="q-text"></h2>
+      <div id="quiz-opts" class="opts-wrap"></div>
+      <div id="quiz-feedback" class="feedback hidden"></div>
+      <button id="quiz-next-btn" class="cta-btn hidden">Next →</button>
+    </div>
+  </section>
+
+  <!-- ══════════════ GAME 4 — TRUE / FALSE ══════════════ -->
+  <section id="game4-screen" class="screen">
+    <header class="game-header g4-header">
+      <button class="ghost-btn back-btn">← Back</button>
+      <span class="gh-title g4-c">⚖️ True or False</span>
+      <span class="gh-right" id="tf-score-tag">0 pts</span>
+    </header>
+    <div class="prog-track">
+      <div id="tf-prog-fill" class="prog-fill g4-prog"></div>
+    </div>
+    <div class="quiz-body">
+      <p id="tf-q-meta" class="q-meta">Statement 1 of 4</p>
+      <p class="q-label">Is this statement <strong>TRUE</strong> or <strong>FALSE</strong>?</p>
+      <div id="tf-statement" class="tf-statement"></div>
+      <div class="tf-btns">
+        <button id="btn-true"  class="tf-btn tf-true-btn">✓ &nbsp;True</button>
+        <button id="btn-false" class="tf-btn tf-false-btn">✗ &nbsp;False</button>
+      </div>
+      <div id="tf-feedback" class="feedback hidden"></div>
+      <button id="tf-next-btn" class="cta-btn g4-cta hidden">Next →</button>
+    </div>
+  </section>
+
+  <!-- ══════════════ RESULT SCREEN ══════════════ -->
+  <section id="result-screen" class="screen">
+    <div class="result-inner">
+      <p id="r-emoji" class="r-emoji">🎉</p>
+      <h2>Game Complete!</h2>
+      <p class="r-score"><span id="r-num">0</span><span id="r-den">/4</span></p>
+      <p id="r-pct" class="r-pct"></p>
+      <p id="r-msg" class="r-msg"></p>
+      <div class="r-actions">
+        <button id="retry-btn" class="ghost-btn">↺ Try Again</button>
+        <button id="menu-btn"  class="cta-btn">← Games Menu</button>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
